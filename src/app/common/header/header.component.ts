@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   public isShown = false;
-  constructor() {}
+  constructor(private appService: AppService) {}
   ngOnInit(): void {}
 
   toggleShow() {
     this.isShown = !this.isShown;
+  }
+
+  isLoggedIn() {
+    return this.appService.isLoggedIn();
+  }
+
+  logout() {
+    this.isShown = false;
+    this.appService.doLogout();
   }
 }

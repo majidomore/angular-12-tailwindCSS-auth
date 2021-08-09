@@ -7,3 +7,12 @@ export class Assessment {
     public image_url: string
   ) {}
 }
+
+export class User {
+  constructor(
+    public first_name: string,
+    public last_name: string,
+    public role: string,
+    public token: string
+  ) {}
+}

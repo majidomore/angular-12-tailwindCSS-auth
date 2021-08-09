@@ -1,9 +1,11 @@
+import { TOKEN_KEY } from './../helpers/interfaces';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Employee } from '../shared/employee';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Assessment } from '@app/helpers/models';
+import { Assessment, User } from '@app/helpers/models';
+import { environment } from '../../environments/environment';
+import { LoginForm } from '../helpers/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +13,13 @@ import { Assessment } from '@app/helpers/models';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  apiUrl = 'https://ds-test-api.herokuapp.com/api';
+  // Api url
+  apiUrl = environment.api_url;
+
   // Http Options
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'X-Token': 'QWRtaW5Vc2Vy',
     }),
   };
 
@@ -24,6 +27,16 @@ export class ApiService {
     return this.http
       .get<Assessment[]>(this.apiUrl + '/userassessments', this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
+  }
+
+  login(login: LoginForm): Observable<User> {
+    return this.http
+      .post<User>(
+        this.apiUrl + '/login',
+        JSON.stringify(login),
+        this.httpOptions
+      )
+      .pipe(catchError(this.handleError));
   }
 
   // Error handling

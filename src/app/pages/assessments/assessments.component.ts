@@ -15,9 +15,6 @@ export class AssessmentsComponent implements OnInit {
   ngOnInit(): void {
     this.api.getUserAssessments().subscribe((data: Assessment[]) => {
       this.assessments = data;
-      this.assessments.forEach((assessment) => {
-        console.log(assessment);
-      });
     });
   }
 }

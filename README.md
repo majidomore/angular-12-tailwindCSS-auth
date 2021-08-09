@@ -1,5 +1,16 @@
 # Angular 12, Lazy Routes, TailwindCSS, Token based authentication
 
+## Installation instructions
+```bash
+# Using npm
+npm install 
+npm run start
+
+# Using yarn
+yarn
+yarn start
+```
+
 ## Adding tailwindCSS
 ```bash
 # Create new angular app using version 12+
